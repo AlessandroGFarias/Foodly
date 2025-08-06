@@ -1,9 +1,9 @@
 import {
-    View, 
-    Text, 
-    StyleSheet,
-    FlatList,
-    TouchableOpacity
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
 } from 'react-native';
 
 export default function PurchaseListComponent({ data, onPress }) {
@@ -14,7 +14,7 @@ export default function PurchaseListComponent({ data, onPress }) {
       renderItem={({ item }) => (
         <View style={styles.itemContainer}>
           <Text style={styles.itemName}>{item.name}</Text>
-          <Text style={styles.itemPrice}>R$ {item.price.toFixed(2)}</Text>
+          <Text style={styles.itemPrice}>{item.price.toLocaleString('pt-Br', {style:"currency", currency:"BRL" })}</Text>
           <TouchableOpacity style={styles.button} onPress={() => onPress(item)}>
             <Text style={styles.buttonText}>Comprar</Text>
           </TouchableOpacity>
@@ -27,7 +27,7 @@ export default function PurchaseListComponent({ data, onPress }) {
 
 const styles = StyleSheet.create({
   itemContainer: {
-    padding: 16,
+    padding:16,
     borderBottomWidth: 1,
     borderBottomColor: '#eee',
   },
