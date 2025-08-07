@@ -43,7 +43,7 @@ export default function Index() {
 
   const [listShoppingCart, setlistShoppingCart] = useState([])
 
-  const [numberOfItens, setNumberOfItens] = useState([0, 0, 0, 0, 0])
+  const [numberOfItens, setNumberOfItens] = useState([])
 
   const [modalShoppingCart, setmodalShoppingCart] = useState(false)
 
@@ -66,11 +66,10 @@ export default function Index() {
         onPressMinus={(index, id) => {
           setNumberOfItens(prev => prev.map((item, i) => i === index ? item - 1 : item ))
 
-          if(numberOfItens[index] < 1 ) {
-            console.log("entrou!")
+          if(numberOfItens[index] === 1) {
+            setlistShoppingCart(prev => prev.filter((item) => item.id !== id))
+            setNumberOfItens(prev => prev.filter((i) => i !== 0 ))
           }
-          
-          
         }}
         listShoppingCart={listShoppingCart}
         numberItensInCart={numberOfItens} 
@@ -98,13 +97,9 @@ export default function Index() {
               // Caso a array mude para uma api, usar findIndex()
               let targetIndex = item.id - 1
 
-              console.log(targetIndex)
-
               if(filter.length === 0) {
                 setlistShoppingCart(prev => ([...prev, item]))
-                setNumberOfItens(prev => prev.map((item, index) => 
-                    targetIndex === index ? parseInt(item) + 1 : parseInt(item)
-                ))
+                setNumberOfItens(prev => [...prev, 1])
                 
               } else {
                 console.log('Item ja Existe!', item)

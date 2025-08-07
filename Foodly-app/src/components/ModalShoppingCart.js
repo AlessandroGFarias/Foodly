@@ -1,5 +1,5 @@
 
-import { Image, Modal, Text, TouchableOpacity, View } from 'react-native'
+import { Image, Modal, Text, TouchableOpacity, View } from 'react-native';
 
 export function ModalShoppingCart({ listShoppingCart, numberItensInCart, modalVisible, onRequestClose, onPressPlus, onPressMinus }) {
 
@@ -29,6 +29,11 @@ export function ModalShoppingCart({ listShoppingCart, numberItensInCart, modalVi
                 <Text style={{margin:20, fontWeight:'bold', fontSize:23}}>Seu Carrinho</Text>
                 {listShoppingCart.length > 0 && (
                     listShoppingCart.map((item, index) => {
+
+                    if(Object.keys(item).length === 0 ) {
+                        return;
+                    }
+                    
                     return (
                     <View 
                         key={item.id} 
@@ -44,7 +49,7 @@ export function ModalShoppingCart({ listShoppingCart, numberItensInCart, modalVi
                                 <View style={{flexDirection:'row'}}>
                                     <TouchableOpacity 
                                         style={{ width: 20, height:20, backgroundColor:'cyan', borderWidth:.5,justifyContent:"center", alignItems:"center"}}
-                                        onPress={() => onPressMinus(index)}
+                                        onPress={() => onPressMinus(index, item.id)}
                                     >
                                     <Text>-</Text>
                                     </TouchableOpacity>
@@ -61,7 +66,7 @@ export function ModalShoppingCart({ listShoppingCart, numberItensInCart, modalVi
                             </View>
                         </View>
                         <View style={{justifyContent:"flex-end"}}>
-                            <Text style={{fontSize:20}}>{item.price.toLocaleString('pt-Br', {style:"currency", currency:"BRL" })}</Text>
+                            <Text style={{fontSize:20}}>{item.price && item.price.toLocaleString('pt-Br', {style:"currency", currency:"BRL" })}</Text>
                         </View>
                     </View>
                     )
