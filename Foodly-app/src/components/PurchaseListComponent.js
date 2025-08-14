@@ -11,6 +11,7 @@ export default function PurchaseListComponent({ data, onPress }) {
   return (
     <FlatList
       data={data}
+      keyExtractor={(item) => String(item.id)}
       renderItem={({ item }) => (
         <View style={styles.itemContainer}>
           <Text style={styles.itemName}>{item.name}</Text>
@@ -20,7 +21,7 @@ export default function PurchaseListComponent({ data, onPress }) {
           </TouchableOpacity>
         </View>
       )}
-      keyExtractor={item => item.id.toString()}
+      
     />
   );
 }

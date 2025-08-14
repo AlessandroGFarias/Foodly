@@ -1,7 +1,7 @@
 
 import { Image, Modal, Text, TouchableOpacity, View } from 'react-native';
 
-export function ModalShoppingCart({ listShoppingCart, numberItensInCart, modalVisible, onRequestClose, onPressPlus, onPressMinus }) {
+export function  ModalShoppingCart({ listShoppingCart, modalVisible, onRequestClose, onPressPlus, onPressMinus }) {
 
     return (
         <View>
@@ -29,10 +29,6 @@ export function ModalShoppingCart({ listShoppingCart, numberItensInCart, modalVi
                 <Text style={{margin:20, fontWeight:'bold', fontSize:23}}>Seu Carrinho</Text>
                 {listShoppingCart.length > 0 && (
                     listShoppingCart.map((item, index) => {
-
-                    if(Object.keys(item).length === 0 ) {
-                        return;
-                    }
                     
                     return (
                     <View 
@@ -49,16 +45,16 @@ export function ModalShoppingCart({ listShoppingCart, numberItensInCart, modalVi
                                 <View style={{flexDirection:'row'}}>
                                     <TouchableOpacity 
                                         style={{ width: 20, height:20, backgroundColor:'cyan', borderWidth:.5,justifyContent:"center", alignItems:"center"}}
-                                        onPress={() => onPressMinus(index, item.id)}
+                                        onPress={() => onPressMinus(item)}
                                     >
                                     <Text>-</Text>
                                     </TouchableOpacity>
 
-                                    <Text style={{marginRight:10, marginLeft:10}}>{numberItensInCart[index]}</Text>
+                                    <Text style={{marginRight:10, marginLeft:10}}>{listShoppingCart[index].amount}</Text>
 
                                     <TouchableOpacity 
                                         style={{ width: 20, height:20, backgroundColor:'cyan', borderWidth:.5,justifyContent:"center", alignItems:"center"}}
-                                        onPress={() => onPressPlus(index, item.id)}
+                                        onPress={() => onPressPlus(item)}
                                     >
                                     <Text>+</Text>
                                     </TouchableOpacity>
